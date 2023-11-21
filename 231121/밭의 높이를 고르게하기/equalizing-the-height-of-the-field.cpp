@@ -1,5 +1,6 @@
 #include <iostream>
-#include <vector>
+#include <algorithm>
+#include <climits>
 using namespace std;
 
 int main() {
@@ -12,25 +13,19 @@ int main() {
         cin>>arr[i];
     }
 
-    int ans=n*t;
+    int ans=INT_MAX;
 
     for(int i=0; i<=n-t; i++)
     {
         int cost=0;
         for(int j=i; j<i+t; j++)
         {
-            if(arr[j]<h)
-            {
-                cost+=h-arr[j];
-            }
-            else if(arr[j]>h)
-            {
-                cost+=arr[j]-h;
-            }
+            cost+=abs(arr[j]-h);
         }
         ans=min(ans, cost);
     }
 
     cout<<ans;
+    
     return 0;
 }
