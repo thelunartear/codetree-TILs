@@ -12,7 +12,7 @@ int main() {
         cin>>arr[i];
     }
 
-    int ans=h*t;
+    int ans=n*t;
 
     for(int i=0; i<=n-t; i++)
     {
