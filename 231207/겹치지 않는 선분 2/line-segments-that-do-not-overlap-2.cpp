@@ -28,10 +28,9 @@ int main() {
                 overlap=true;
                 break;
             }
-
-            if(overlap==false)
-                ans++;
         }
+        if(overlap==false)
+                ans++;
     }    
 
     cout<<ans;
