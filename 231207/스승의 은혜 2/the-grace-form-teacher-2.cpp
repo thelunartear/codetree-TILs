@@ -18,20 +18,19 @@ int main() {
 
     for(int i=0;i<n;i++)
     {
-       int total = 0;
-       for (int j = 0; j <= i; ++j) {
-            if (p[j] / 2 <= b) 
+        int total=0, cnt=0;
+        for(int j=0;j<n;j++)
+        {
+            int now=0;
+            if(i==j) now=p[j]/2;
+            else now=p[j];
+            if(total+now<=b)
             {
-                b -= p[j] / 2;
-                ++total;
-            } 
-            else 
-            {
-                break;
+                total+=now;
+                cnt++;
             }
         }
-        ans = max(ans, total);
-        b += p[i] / 2;
+        ans = max(ans, cnt);
     }
 
     cout<<ans;
