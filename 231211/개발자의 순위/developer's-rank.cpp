@@ -4,37 +4,48 @@ using namespace std;
 int main() {
     int k, n;
     cin >> k >> n;
-
-    int arr[k][n];
     
-    for(int i = 0; i < k; i++) {
-        for(int j = 0; j < n; j++) {
+    int arr[k][n];
+
+    for(int i = 0; i < k; i++)
+        for(int j = 0; j < n; j++)
             cin >> arr[i][j];
-        }
-    }
 
-    int cnt = 0;
+    int ans = 0;
 
-    for(int i = 0; i < n; i++) {
-        for(int j = i + 1; j < n; j++) {
-            if(i == j) continue;
-            bool flag = true;
+    // 모든 쌍에 대해서 불변의 순위인 쌍을 찾습니다.
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= n; j++) {
+            // i번 개발자가 j번 개발자보다 항상 높은 순위인지 여부를 확인합니다.
 
+            // i와 j가 같을 경우 넘어갑니다.
+            if(i == j)
+                continue;
+            
+            // correct : i번 개발자가 j번 개발자보다 항상 높은 순위일때 true
+            bool correct = true;
+
+            // k번의 모든 경기에 대해서 두 개발자의 위치를 찾고,
+            // 하나라도 i번 개발자가 더 뒤에 있으면 correct를 false로 바꿉니다.
             for(int x = 0; x < k; x++) {
-                int ii = 0, ij = 0;
+                int index_i = 0, index_j = 0;
+
                 for(int y = 0; y < n; y++) {
                     if(arr[x][y] == i)
-                        ii = y;
+                        index_i = y;
                     if(arr[x][y] == j)
-                        ij = y;
+                        index_j = y;
                 }
-                if(ii > ij) flag = false;
-            }
-            if(flag) cnt++;
-        }
-    }
 
-    cout << cnt;
+                if(index_i > index_j)
+                    correct = false;
+            }
+
+            if(correct)
+                ans++;
+        }
+    
+    cout << ans;
 
     return 0;
 }
