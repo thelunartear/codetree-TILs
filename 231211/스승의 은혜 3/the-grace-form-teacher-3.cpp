@@ -7,26 +7,31 @@ int main() {
     cin >> n >> b;
 
     int p[n], s[n];
-    for (int i = 0; i < n; i++) {
+    for(int i = 0; i < n; i++) {
         cin >> p[i] >> s[i];
     }
 
-    int ans = 0;
+    int maxStudents = 0;
 
-    for (int i = 0; i < n; i++) {
-        int cnt = 0;
-        for (int j = 0; j < n; j++) {
-            int cost = (i == j) ? p[j] / 2 + s[j] : p[j] + s[j];
-            if (cost <= b) {
-                b -= cost;
-                cnt++;
+    for(int i = 0; i < n; i++) {
+        int remain = b, cnt = 0;
+        for(int j = 0; j < n; j++) {
+            if(i == j) { // i번째 학생의 선물에 쿠폰을 사용하는 경우
+                if(p[j] / 2 + s[j] <= remain) {
+                    cnt++; // 쿠폰을 사용하여 선물을 구매할 수 있으면 cnt 증가
+                    remain -= p[j] / 2 + s[j]; // 사용한 예산 차감
+                }
+            } else {
+                if(p[j] + s[j] <= remain) {
+                    cnt++; // 쿠폰을 사용하지 않고 선물을 구매할 수 있으면 cnt 증가
+                    remain -= p[j] + s[j]; // 사용한 예산 차감
+                }
             }
         }
-        ans = max(ans, cnt);
-        b += cnt * ((p[i] / 2) + s[i]); // 쿠폰 사용으로 인한 비용 복원
+        maxStudents = max(maxStudents, cnt);
     }
 
-    cout << ans;
+    cout << maxStudents << endl;
 
     return 0;
 }
