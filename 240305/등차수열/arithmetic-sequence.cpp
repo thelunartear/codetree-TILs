@@ -1,39 +1,36 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
-
 using namespace std;
 
 int main() {
+    // 여기에 코드를 작성해주세요.
     int n;
-    int maxCount = 0;
     cin>>n;
-    vector<int> arr(n);
+    int arr[n];
 
     for(int i=0;i<n;i++)
     {
         cin>>arr[i];
     }
 
-    for(int i=0;i<n;i++)
+    int ans=0;
+
+    for(int x=1;x<=100;x++)
     {
-        for(int j=i+1;j<n;j++)
+        int cnt=0;
+        for(int i=0;i<n;i++)
         {
-            int diff = arr[j] - arr[i];
-            int count = 2;
-            int next = arr[j] + diff;
-            for (int k = j + 1; k < n; ++k) 
+            for(int j=i+1;j<n;j++)
             {
-                if (arr[k] == next) 
+                if(arr[i]+arr[j] == 2*x)
                 {
-                    count++;
-                    next += diff;
+                    cnt++;
                 }
             }
-            maxCount = max(maxCount, count);
         }
+        ans=max(cnt, ans);
     }
-    cout<<maxCount<<endl;
+    cout<<ans;
 
     return 0;
 }
