@@ -39,8 +39,7 @@ int main() {
         }
         else if(command=="empty")
         {
-            if(l.size()==0) cout<<1<<endl;
-            else cout<<0<<endl;
+            cout<<l.empty()<<endl;
         }
         else if(command=="front")
         {
